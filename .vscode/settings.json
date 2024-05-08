@@ -7,4 +7,15 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "eslint.format.enable": true,
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "[prisma]": {
+    "editor.formatOnSave": true
+  },
+  "files.associations": {
+    "*.env.*": "dotenv"
+  },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "explorer.compactFolders": false,
 }

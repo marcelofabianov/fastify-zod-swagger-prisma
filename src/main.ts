@@ -1,5 +1,8 @@
-function main() {
-  console.log('Hello World!')
-}
+import { serverStart } from './http/server.js'
 
-main()
+const appPromise = serverStart()
+
+appPromise.catch((error) => {
+  console.error(error)
+  process.exit(1)
+})

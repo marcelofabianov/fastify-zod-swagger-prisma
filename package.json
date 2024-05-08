@@ -1,5 +1,5 @@
 {
-  "name": "fastify-trpc",
+  "name": "fastify-zod-swagger-prisma",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -30,12 +30,8 @@
     "studio": "prisma studio"
   },
   "dependencies": {
-    "@fastify/cors": "9.0.1",
     "@prisma/adapter-pg": "5.13.0",
     "@prisma/client": "5.13.0",
-    "@trpc/client": "10.45.2",
-    "@trpc/server": "10.45.2",
-    "argon2": "0.40.1",
     "fastify": "4.26.2",
     "fastify-type-provider-zod": "1.1.9",
     "pg": "8.11.5",
@@ -55,7 +51,6 @@
     "prettier-eslint": "16.3.0",
     "prisma": "5.13.0",
     "supertest": "7.0.0",
-    "ts-node": "10.9.2",
     "tsup": "8.0.2",
     "tsx": "4.7.3",
     "typescript": "5.4.5",
