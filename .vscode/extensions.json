@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "steoates.autoimport",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "rvest.vs-code-prettier-eslint",
+    "EditorConfig.EditorConfig",
+  ]
+}

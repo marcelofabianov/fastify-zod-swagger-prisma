@@ -1,0 +1,12 @@
+# Typescript
+/dist
+/build
+
+# Node
+/node_modules
+
+# Environment
+/.env
+
+# Tests
+/tests/output
