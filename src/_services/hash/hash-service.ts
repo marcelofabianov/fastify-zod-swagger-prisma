@@ -1,17 +1,20 @@
 import * as argon2 from 'argon2'
 
-import { env } from '@/_core/environment'
 import { HashServiceInterface } from './hash-service-interface'
 import { ErrorHandle } from '@/_core/errors/error-handle'
 import { HashErrorEnum } from './hash-error-enum'
 
 export class HashService implements HashServiceInterface {
-  private readonly hashOptions = {
-    raw: false,
-    type: argon2.argon2id,
-    hashLength: 33,
-    timeCost: 3,
-    salt: Buffer.from(env.HASH_SALT),
+  private readonly hashOptions
+
+  public constructor(hashSalt: string) {
+    this.hashOptions = {
+      raw: false,
+      type: argon2.argon2id,
+      hashLength: 33,
+      timeCost: 3,
+      salt: Buffer.from(hashSalt, 'utf8'),
+    }
   }
 
   public async hash(value: string): Promise<string> {
@@ -19,7 +22,7 @@ export class HashService implements HashServiceInterface {
       const hashed = await argon2.hash(value, this.hashOptions)
       return hashed
     } catch (error) {
-      throw new ErrorHandle(500, HashErrorEnum.ERROR_HASHING)
+      throw new ErrorHandle(HashErrorEnum.ERROR_HASHING)
     }
   }
 
@@ -27,7 +30,7 @@ export class HashService implements HashServiceInterface {
     try {
       return await argon2.verify(hash, value)
     } catch (error) {
-      throw new ErrorHandle(500, HashErrorEnum.ERROR_COMPARING)
+      throw new ErrorHandle(HashErrorEnum.ERROR_COMPARING)
     }
   }
 }
