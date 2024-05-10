@@ -21,6 +21,7 @@
     "skipLibCheck": true,
     "removeComments": true,
     "incremental": true,
+    "moduleResolution": "node",
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
