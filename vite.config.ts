@@ -8,6 +8,7 @@ export default defineConfig({
     clearMocks: true,
     globals: false,
     environment: 'node',
+    include: ['./src/**/*.test.ts'],
     coverage: {
       exclude: ['node_modules', 'dist', 'vite.config.ts'],
       provider: 'v8',
