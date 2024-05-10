@@ -1,6 +1,9 @@
 import { fastify } from 'fastify'
+import { fastifySwagger } from '@fastify/swagger'
+import { fastifySwaggerUi } from '@fastify/swagger-ui'
 import { env } from '../config/env.js'
 import {
+  jsonSchemaTransform,
   ZodTypeProvider,
   serializerCompiler,
   validatorCompiler,
@@ -13,6 +16,22 @@ const app = fastify({
 
 app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
+
+app.register(fastifySwagger, {
+  openapi: {
+    info: {
+      title: 'Pluto',
+      description: 'Pluto controle financeiro API',
+      version: '0.0.1',
+    },
+    servers: [],
+  },
+  transform: jsonSchemaTransform,
+})
+
+app.register(fastifySwaggerUi, {
+  routePrefix: '/docs',
+})
 
 app.register(hello)
 
