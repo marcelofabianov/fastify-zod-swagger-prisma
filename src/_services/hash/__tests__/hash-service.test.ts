@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, test } from 'vitest'
 import { HashService } from '../hash-service'
 import { HashErrorEnum } from '../hash-error-enum'
 
-describe('HashService', () => {
+describe('Services / HashService', () => {
   let hashService: HashService
 
   beforeEach(() => {
