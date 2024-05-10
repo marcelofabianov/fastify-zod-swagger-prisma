@@ -21,7 +21,7 @@ export class ServiceContainer implements ContainerInterface {
       passwordValidate,
     )
 
-    this.container.add('hashService', hashService)
-    this.container.add('passwordService', passwordService)
+    this.container.add('HashService', hashService)
+    this.container.add('PasswordService', passwordService)
   }
 }
