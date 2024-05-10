@@ -5,7 +5,7 @@ const envSchema = z.object({
   NODE_ENV: z.string().default('development'),
   DATABASE_URL: z.string(),
   PORT: z.coerce.number().default(3333),
-  PASSWORD_SALT: z.string(),
+  HASH_SALT: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

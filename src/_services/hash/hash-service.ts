@@ -11,15 +11,15 @@ export class HashService implements HashServiceInterface {
     type: argon2.argon2id,
     hashLength: 33,
     timeCost: 3,
-    salt: Buffer.from(env.PASSWORD_SALT),
+    salt: Buffer.from(env.HASH_SALT),
   }
 
-  public async hash(password: string): Promise<string> {
+  public async hash(value: string): Promise<string> {
     try {
-      const hashedPassword = await argon2.hash(password, this.hashOptions)
-      return hashedPassword
+      const hashed = await argon2.hash(value, this.hashOptions)
+      return hashed
     } catch (error) {
-      throw new ErrorHandle(500, HashErrorEnum.ERROR_HASHING_PASSWORD)
+      throw new ErrorHandle(500, HashErrorEnum.ERROR_HASHING)
     }
   }
 
@@ -27,7 +27,7 @@ export class HashService implements HashServiceInterface {
     try {
       return await argon2.verify(hash, value)
     } catch (error) {
-      throw new ErrorHandle(500, HashErrorEnum.ERROR_COMPARING_PASSWORD)
+      throw new ErrorHandle(500, HashErrorEnum.ERROR_COMPARING)
     }
   }
 }
