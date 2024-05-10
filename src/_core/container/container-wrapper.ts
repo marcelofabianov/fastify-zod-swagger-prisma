@@ -5,11 +5,11 @@ import { ContainerWrapperInterface } from './container-wrapper-interface'
 export class ContainerWrapper implements ContainerWrapperInterface {
   private readonly container: Record<string, unknown>
 
-  constructor() {
+  public constructor() {
     this.container = {}
   }
 
-  add(key: string, value: unknown): void {
+  public add(key: string, value: unknown): void {
     if (this.has(key)) {
       throw new ErrorHandle(500, `Key ${key} already exists in container`)
     }
@@ -17,7 +17,7 @@ export class ContainerWrapper implements ContainerWrapperInterface {
     this.container[key] = value
   }
 
-  get(key: string): unknown {
+  public get(key: string): unknown {
     if (!this.has(key)) {
       throw new ErrorHandle(500, `Key ${key} does not exist in container`)
     }
@@ -25,7 +25,7 @@ export class ContainerWrapper implements ContainerWrapperInterface {
     return this.container[key]
   }
 
-  has(key: string): boolean {
+  public has(key: string): boolean {
     return this.container[key] !== undefined
   }
 }
