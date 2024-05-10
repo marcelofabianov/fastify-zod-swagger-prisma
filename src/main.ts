@@ -1,4 +1,4 @@
-import { serverStart } from './http/server.js'
+import { serverStart } from './server.js'
 
 const appPromise = serverStart()
 
