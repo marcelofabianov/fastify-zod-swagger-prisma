@@ -10,6 +10,8 @@ import {
 
 import { env } from './_core/environment'
 import * as userRouter from './user/infra/http'
+import { ContainerWrapperInterface } from './_core/container/container-wrapper-interface'
+import { RouterInterface } from './_core/router-interface'
 
 const app = fastify({
   logger: false,
@@ -34,13 +36,13 @@ app.register(fastifySwaggerUi, {
   routePrefix: '/api/docs',
 })
 
-const serverStart = async () => {
+const serverStart = async (container: ContainerWrapperInterface) => {
   app.get('/', async () => {
     return {}
   })
 
-  app.register(userRouter.getUser)
-  app.register(userRouter.createUser)
+  app.register(container.get<RouterInterface>('CreateUserRoute').handler)
+  app.register(container.get<RouterInterface>('GetUserRoute').handler)
 
   if (env.NODE_ENV !== 'test') {
     try {

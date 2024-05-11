@@ -4,6 +4,7 @@ import { ContainerWrapper } from '@/_core/container/container-wrapper'
 import { UserContainer } from '../user-container'
 import { UserRepositoryInterface } from '../infra/repositories/user-repository-interface'
 import { CreateUserUseCaseInterface } from '../domain/use-cases/create-user/create-user-use-case-interface'
+import { RouterInterface } from '@/_core/router-interface'
 
 describe('User / User Container', () => {
   test('Deve registrar os artefatos de user no container', () => {
@@ -21,11 +22,19 @@ describe('User / User Container', () => {
     const createUserUseCase =
       userContainer.get<CreateUserUseCaseInterface>('CreateUserUseCase')
 
+    const getUserRoute = userContainer.get<RouterInterface>('GetUserRoute')
+    const createUserRoute =
+      userContainer.get<RouterInterface>('CreateUserRoute')
+
     expect(userRepository).toBeDefined()
     expect(createUserUseCase).toBeDefined()
+    expect(getUserRoute).toBeDefined()
+    expect(createUserRoute).toBeDefined()
 
     expectTypeOf(userRepository).toMatchTypeOf<UserRepositoryInterface>()
     expectTypeOf(createUserUseCase).toMatchTypeOf<CreateUserUseCaseInterface>()
+    expectTypeOf(getUserRoute).toMatchTypeOf<RouterInterface>()
+    expectTypeOf(createUserRoute).toMatchTypeOf<RouterInterface>()
   })
 
   test('Deve lançar erro se tentar acessar um artefato não registrado', () => {

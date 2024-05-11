@@ -5,6 +5,7 @@ import { DatabaseClientInterface } from '@/_adapters/database-interface'
 import { UserRepositoryInterface } from './infra/repositories/user-repository-interface'
 import { CreateUserUseCase } from './domain/use-cases/create-user/create-user-use-case'
 import { CreateUserUseCaseInterface } from './domain/use-cases/create-user/create-user-use-case-interface'
+import { CreateUserRoute, GetUserRoute } from './infra/http'
 
 export class UserContainer implements ContainerInterface {
   public constructor(private container: ContainerWrapperInterface) {
@@ -16,6 +17,7 @@ export class UserContainer implements ContainerInterface {
   public register(): void {
     this.registerRepositories()
     this.registerUseCases()
+    this.registerRoutes()
   }
 
   public get<T>(key: string): T {
@@ -40,5 +42,16 @@ export class UserContainer implements ContainerInterface {
       'CreateUserUseCase',
       createUserUseCase,
     )
+  }
+
+  private registerRoutes(): void {
+    const createUserUseCase =
+      this.get<CreateUserUseCaseInterface>('CreateUserUseCase')
+
+    const createUserRoute = new CreateUserRoute(createUserUseCase)
+    const getUserRoute = new GetUserRoute()
+
+    this.container.add<CreateUserRoute>('CreateUserRoute', createUserRoute)
+    this.container.add<GetUserRoute>('GetUserRoute', getUserRoute)
   }
 }
