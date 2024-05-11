@@ -6,6 +6,7 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   PORT: z.coerce.number().default(3333),
   HASH_SALT: z.string(),
+  LOG_QUERY: z.coerce.boolean().default(false),
 })
 
 const _env = envSchema.safeParse(process.env)
