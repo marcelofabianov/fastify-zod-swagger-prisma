@@ -1,11 +1,13 @@
+import { IdInterface } from '@/_core/value-objects/id-interface'
 import { CreateUserDtoInterface } from './dto/create-user-dto-interface'
 import { UserInterface } from './user-interface'
+import { EmailInterface } from '@/_core/value-objects/email-interface'
 
 export class User implements UserInterface {
   private constructor(
-    private readonly id: string,
+    private readonly id: IdInterface,
     private readonly name: string,
-    private readonly email: string,
+    private readonly email: EmailInterface,
     private readonly createdAt: Date,
     private readonly updatedAt: Date,
     private readonly deletedAt: Date | null,
@@ -25,7 +27,7 @@ export class User implements UserInterface {
   }
 
   public getId(): string {
-    return this.id
+    return this.id.getValue()
   }
 
   public getName(): string {
@@ -33,7 +35,7 @@ export class User implements UserInterface {
   }
 
   public getEmail(): string {
-    return this.email
+    return this.email.getValue()
   }
 
   public getCreatedAt(): Date {
