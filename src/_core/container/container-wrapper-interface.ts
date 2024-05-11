@@ -1,5 +1,5 @@
 export interface ContainerWrapperInterface {
-  add(key: string, value: unknown): void
-  get(key: string): unknown
+  add<T>(key: string, value: T): void
+  get<T>(key: string): T
   has(key: string): boolean
 }

@@ -9,20 +9,20 @@ export class ContainerWrapper implements ContainerWrapperInterface {
     this.container = {}
   }
 
-  public add(key: string, value: unknown): void {
+  public add<T>(key: string, value: T): void {
     if (this.has(key)) {
-      throw new ErrorHandle(500, `Key ${key} already exists in container`)
+      throw new ErrorHandle(`Key ${key} already exists in container`)
     }
 
     this.container[key] = value
   }
 
-  public get(key: string): unknown {
+  public get<T>(key: string): T {
     if (!this.has(key)) {
-      throw new ErrorHandle(500, `Key ${key} does not exist in container`)
+      throw new ErrorHandle(`Key ${key} does not exist in container`)
     }
 
-    return this.container[key]
+    return this.container[key] as T
   }
 
   public has(key: string): boolean {
