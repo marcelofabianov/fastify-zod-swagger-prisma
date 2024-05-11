@@ -1,4 +1,4 @@
-import { ErrorHandle } from '@/_core/errors/error-handle'
+import { ErrorHandle } from '@core/errors/error-handle'
 import { PasswordServiceInterface } from '@/_services/password/password-service-interface'
 
 export class Password {

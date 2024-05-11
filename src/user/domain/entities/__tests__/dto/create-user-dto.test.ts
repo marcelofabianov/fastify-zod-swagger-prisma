@@ -1,8 +1,8 @@
 import { test, describe, expect } from 'vitest'
 import { CreateUserDto } from '../../dto/create-user-dto'
 import { randomUUID } from 'crypto'
-import { Id } from '@/_core/value-objects/id'
-import { Email } from '@/_core/value-objects/email'
+import { Id } from '@core/value-objects/id'
+import { Email } from '@core/value-objects/email'
 
 describe('User / Domain / Entities / Dto / CreateUserDto', () => {
   test('Deve criar uma nova instancia de CreateUserDto com dados validos', () => {

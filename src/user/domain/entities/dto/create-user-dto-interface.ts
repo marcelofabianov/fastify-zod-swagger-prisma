@@ -1,5 +1,5 @@
-import { EmailInterface } from '@/_core/value-objects/email-interface'
-import { IdInterface } from '@/_core/value-objects/id-interface'
+import { EmailInterface } from '@core/value-objects/email-interface'
+import { IdInterface } from '@core/value-objects/id-interface'
 
 export interface CreateUserDtoInterface {
   readonly id: IdInterface

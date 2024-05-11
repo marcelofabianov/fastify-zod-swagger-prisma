@@ -1,9 +1,9 @@
 import { CreateUserDtoInterface } from './create-user-dto-interface'
-import { IdInterface } from '@/_core/value-objects/id-interface'
-import { Id } from '@/_core/value-objects/id'
-import { ErrorHandle } from '@/_core/errors/error-handle'
-import { EmailInterface } from '@/_core/value-objects/email-interface'
-import { Email } from '@/_core/value-objects/email'
+import { IdInterface } from '@core/value-objects/id-interface'
+import { Id } from '@core/value-objects/id'
+import { ErrorHandle } from '@core/errors/error-handle'
+import { EmailInterface } from '@core/value-objects/email-interface'
+import { Email } from '@core/value-objects/email'
 
 export class CreateUserDto implements CreateUserDtoInterface {
   public readonly id: IdInterface

@@ -1,7 +1,7 @@
-import { IdInterface } from '@/_core/value-objects/id-interface'
+import { IdInterface } from '@core/value-objects/id-interface'
 import { CreateUserDtoInterface } from './dto/create-user-dto-interface'
 import { UserInterface } from './user-interface'
-import { EmailInterface } from '@/_core/value-objects/email-interface'
+import { EmailInterface } from '@core/value-objects/email-interface'
 
 export class User implements UserInterface {
   private constructor(

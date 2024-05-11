@@ -8,7 +8,7 @@ import {
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
-import { hello } from './http/routes/hello'
+import { hello } from './user/infra/http/routes/hello'
 
 const app = fastify({
   logger: false,

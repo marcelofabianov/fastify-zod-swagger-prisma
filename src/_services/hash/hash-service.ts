@@ -1,7 +1,7 @@
 import * as argon2 from 'argon2'
 
 import { HashServiceInterface } from './hash-service-interface'
-import { ErrorHandle } from '@/_core/errors/error-handle'
+import { ErrorHandle } from '@core/errors/error-handle'
 import { HashErrorEnum } from './hash-error-enum'
 
 export class HashService implements HashServiceInterface {
