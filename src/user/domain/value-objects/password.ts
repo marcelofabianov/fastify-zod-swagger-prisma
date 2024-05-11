@@ -1,7 +1,8 @@
 import { ErrorHandle } from '@core/errors/error-handle'
 import { PasswordServiceInterface } from '@/_services/password/password-service-interface'
+import { PasswordInterface } from './password-interface'
 
-export class Password {
+export class Password implements PasswordInterface {
   private constructor(private readonly value: string) {}
 
   public getValue(): string {
