@@ -65,4 +65,17 @@ describe('Services / PasswordService', () => {
     expect(passwordValidateMock.validate).toHaveBeenCalledWith(password)
     expect(passwordValidateMock.validate).toHaveBeenCalledTimes(1)
   })
+
+  test('Deve chamar o metodo getMessages do PasswordValidate e retornar o mensagem de erro quando password nao for valido', async () => {
+    passwordValidateMock.validate.mockReturnValue(false)
+    passwordValidateMock.getMessages.mockReturnValue(['error-message'])
+
+    const password = 'password'
+    const result = passwordService.validate(password)
+    const errorMessages = passwordService.getErrorMessages()
+
+    expect(result).toBe(false)
+    expect(errorMessages).toEqual(['error-message'])
+    expect(passwordValidateMock.getMessages).toHaveBeenCalledTimes(1)
+  })
 })

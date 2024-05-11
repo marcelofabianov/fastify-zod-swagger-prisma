@@ -4,6 +4,8 @@ import { PasswordRandomInterface } from './password-random-interface'
 import { PasswordValidateInterface } from './password-validate-interface'
 
 export class PasswordService implements PasswordServiceInterface {
+  private errorMessages: string[] = []
+
   public constructor(
     private readonly hashService: HashServiceInterface,
     private readonly passwordRandom: PasswordRandomInterface,
@@ -26,6 +28,16 @@ export class PasswordService implements PasswordServiceInterface {
   }
 
   public validate(password: string): boolean {
-    return this.PasswordValidate.validate(password)
+    const isValid = this.PasswordValidate.validate(password)
+
+    if (!isValid) {
+      this.errorMessages = this.PasswordValidate.getMessages()
+    }
+
+    return isValid
+  }
+
+  public getErrorMessages(): string[] | [] {
+    return this.errorMessages
   }
 }
