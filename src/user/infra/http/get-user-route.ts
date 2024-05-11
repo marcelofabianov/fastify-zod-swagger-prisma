@@ -6,7 +6,7 @@ export async function getUser(app: FastifyInstance) {
     '/api/v1/users',
     {
       schema: {
-        tags: ['default'],
+        tags: ['users'],
       },
     },
     async () => {

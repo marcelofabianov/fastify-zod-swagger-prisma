@@ -9,7 +9,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { env } from './_core/environment'
-import * as users from './user/infra/http'
+import * as userRouter from './user/infra/http'
 
 const app = fastify({
   logger: false,
@@ -39,7 +39,8 @@ const serverStart = async () => {
     return {}
   })
 
-  app.register(users.getUser)
+  app.register(userRouter.getUser)
+  app.register(userRouter.createUser)
 
   if (env.NODE_ENV !== 'test') {
     try {
