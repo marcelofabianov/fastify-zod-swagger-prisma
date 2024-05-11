@@ -6,11 +6,15 @@ import { UserRepositoryInterface } from './infra/repositories/user-repository-in
 import { CreateUserUseCase } from './domain/use-cases/create-user/create-user-use-case'
 import { CreateUserUseCaseInterface } from './domain/use-cases/create-user/create-user-use-case-interface'
 import { CreateUserRoute, GetUserRoute } from './infra/http'
+import { PasswordServiceInterface } from '@/_services/password/password-service-interface'
 
 export class UserContainer implements ContainerInterface {
   public constructor(private container: ContainerWrapperInterface) {
     if (!this.container.has('db')) {
       throw new Error('Database client not found in container')
+    }
+    if (!this.container.has('PasswordService')) {
+      throw new Error('Password service not found in container')
     }
   }
 
@@ -48,7 +52,13 @@ export class UserContainer implements ContainerInterface {
     const createUserUseCase =
       this.get<CreateUserUseCaseInterface>('CreateUserUseCase')
 
-    const createUserRoute = new CreateUserRoute(createUserUseCase)
+    const passwordService =
+      this.get<PasswordServiceInterface>('PasswordService')
+
+    const createUserRoute = new CreateUserRoute(
+      createUserUseCase,
+      passwordService,
+    )
     const getUserRoute = new GetUserRoute()
 
     this.container.add<CreateUserRoute>('CreateUserRoute', createUserRoute)

@@ -1,3 +1,3 @@
 export interface RouterInterface {
-  handler(app: unknown): void
+  handler(app: unknown, reply: unknown): void
 }

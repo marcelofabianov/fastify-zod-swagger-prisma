@@ -5,11 +5,27 @@ import { UserContainer } from '../user-container'
 import { UserRepositoryInterface } from '../infra/repositories/user-repository-interface'
 import { CreateUserUseCaseInterface } from '../domain/use-cases/create-user/create-user-use-case-interface'
 import { RouterInterface } from '@/_core/router-interface'
+import { HashService } from '@/_services/hash/hash-service'
+import { PasswordService } from '@/_services/password/password-service'
+import { PasswordRandom } from '@/_services/password/password-random'
+import { PasswordValidate } from '@/_services/password/password-validate'
 
 describe('User / User Container', () => {
+  const salt = 'asdfjsklfjalsjdfalsjfsakfjlsdfasdfa'
+  const hashService = new HashService(salt)
+  const passwordValidate = new PasswordValidate()
+  const passwordRandom = new PasswordRandom(passwordValidate)
+  const passwordService = new PasswordService(
+    hashService,
+    passwordRandom,
+    passwordValidate,
+  )
+
   test('Deve registrar os artefatos de user no container', () => {
-    const db = {} as DatabaseClientInterface
     const containerWrapper = new ContainerWrapper()
+    containerWrapper.add<PasswordService>('PasswordService', passwordService)
+
+    const db = {} as DatabaseClientInterface
     containerWrapper.add<DatabaseClientInterface>('db', db)
 
     const userContainer = new UserContainer(containerWrapper)
@@ -41,6 +57,7 @@ describe('User / User Container', () => {
     const db = {} as DatabaseClientInterface
     const containerWrapper = new ContainerWrapper()
     containerWrapper.add<DatabaseClientInterface>('db', db)
+    containerWrapper.add<PasswordService>('PasswordService', passwordService)
 
     const userContainer = new UserContainer(containerWrapper)
 
@@ -55,6 +72,7 @@ describe('User / User Container', () => {
     const db = {} as DatabaseClientInterface
     const containerWrapper = new ContainerWrapper()
     containerWrapper.add<DatabaseClientInterface>('db', db)
+    containerWrapper.add<PasswordService>('PasswordService', passwordService)
 
     const userContainer = new UserContainer(containerWrapper)
 
@@ -67,9 +85,20 @@ describe('User / User Container', () => {
 
   test('Deve lançar erro se tentar criar um UserContainer sem a conexao com banco no container wrapper', () => {
     const containerWrapper = new ContainerWrapper()
+    containerWrapper.add<PasswordService>('PasswordService', passwordService)
 
     expect(() => {
       new UserContainer(containerWrapper)
     }).toThrowError('Database client not found in container')
+  })
+
+  test('Deve lançar erro se tentar criar um UserContainer sem o PasswordService no container wrapper', () => {
+    const db = {} as DatabaseClientInterface
+    const containerWrapper = new ContainerWrapper()
+    containerWrapper.add<DatabaseClientInterface>('db', db)
+
+    expect(() => {
+      new UserContainer(containerWrapper)
+    }).toThrowError('Password service not found in container')
   })
 })
