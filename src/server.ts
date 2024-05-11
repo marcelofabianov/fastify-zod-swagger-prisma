@@ -1,14 +1,15 @@
 import { fastify } from 'fastify'
 import { fastifySwagger } from '@fastify/swagger'
 import { fastifySwaggerUi } from '@fastify/swagger-ui'
-import { env } from './_core/environment'
 import {
   jsonSchemaTransform,
   ZodTypeProvider,
   serializerCompiler,
   validatorCompiler,
 } from 'fastify-type-provider-zod'
-import { hello } from './user/infra/http/routes/hello'
+
+import { env } from './_core/environment'
+import * as users from './user/infra/http'
 
 const app = fastify({
   logger: false,
@@ -21,7 +22,7 @@ app.register(fastifySwagger, {
   openapi: {
     info: {
       title: 'Pluto',
-      description: 'Pluto controle financeiro API',
+      description: 'Pluto API',
       version: '0.0.1',
     },
     servers: [],
@@ -30,12 +31,16 @@ app.register(fastifySwagger, {
 })
 
 app.register(fastifySwaggerUi, {
-  routePrefix: '/docs',
+  routePrefix: '/api/docs',
 })
 
-app.register(hello)
-
 const serverStart = async () => {
+  app.get('/', async () => {
+    return {}
+  })
+
+  app.register(users.getUser)
+
   if (env.NODE_ENV !== 'test') {
     try {
       await app.listen({ port: env.PORT })
