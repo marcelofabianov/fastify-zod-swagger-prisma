@@ -1,3 +1,3 @@
-# Fastify Zod Swagger Prisma
+# Pluto / Pedido de Compras
 
-Teste de integração entre Fastify, Zod, Swagger e Prisma.
+Software de gestão de compras para pequenas empresas no formato de SaaS.
