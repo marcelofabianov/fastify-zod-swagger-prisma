@@ -29,6 +29,9 @@ importers:
       fastify-type-provider-zod:
         specifier: 1.1.9
         version: 1.1.9(fastify@4.26.2)(zod@3.23.5)
+      uuid:
+        specifier: 9.0.1
+        version: 9.0.1
       zod:
         specifier: 3.23.5
         version: 3.23.5
@@ -42,6 +45,9 @@ importers:
       '@types/supertest':
         specifier: 6.0.2
         version: 6.0.2
+      '@types/uuid':
+        specifier: 9.0.8
+        version: 9.0.8
       '@typescript-eslint/eslint-plugin':
         specifier: 7.7.1
         version: 7.7.1(@typescript-eslint/parser@7.7.1(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5)
@@ -661,6 +667,9 @@ packages:
 
   '@types/supertest@6.0.2':
     resolution: {integrity: sha512-137ypx2lk/wTQbW6An6safu9hXmajAifU/s7szAHLN/FeIm5w7yR0Wkl9fdJMRSHwOn4HLAI0DaB2TOORuhPDg==}
+
+  '@types/uuid@9.0.8':
+    resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
 
   '@typescript-eslint/eslint-plugin@7.7.1':
     resolution: {integrity: sha512-KwfdWXJBOviaBVhxO3p5TJiLpNuh2iyXyjmWN0f1nU87pwyvfS0EmjC6ukQVYVFJd/K1+0NWGPDXiyEyQorn0Q==}
@@ -2167,6 +2176,10 @@ packages:
   uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
 
+  uuid@9.0.1:
+    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    hasBin: true
+
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
@@ -2738,6 +2751,8 @@ snapshots:
     dependencies:
       '@types/methods': 1.1.4
       '@types/superagent': 8.1.7
+
+  '@types/uuid@9.0.8': {}
 
   '@typescript-eslint/eslint-plugin@7.7.1(@typescript-eslint/parser@7.7.1(eslint@8.56.0)(typescript@5.4.5))(eslint@8.56.0)(typescript@5.4.5)':
     dependencies:
@@ -4342,6 +4357,8 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
+
+  uuid@9.0.1: {}
 
   v8-compile-cache-lib@3.0.1:
     optional: true
