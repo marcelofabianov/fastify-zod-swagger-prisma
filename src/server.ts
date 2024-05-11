@@ -9,7 +9,6 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { env } from './_core/environment'
-import * as userRouter from './user/infra/http'
 import { ContainerWrapperInterface } from './_core/container/container-wrapper-interface'
 import { RouterInterface } from './_core/router-interface'
 
