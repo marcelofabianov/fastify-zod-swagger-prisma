@@ -27,4 +27,40 @@ describe('User / User Container', () => {
     expectTypeOf(userRepository).toMatchTypeOf<UserRepositoryInterface>()
     expectTypeOf(createUserUseCase).toMatchTypeOf<CreateUserUseCaseInterface>()
   })
+
+  test('Deve lançar erro se tentar acessar um artefato não registrado', () => {
+    const db = {} as DatabaseClientInterface
+    const containerWrapper = new ContainerWrapper()
+    containerWrapper.add<DatabaseClientInterface>('db', db)
+
+    const userContainer = new UserContainer(containerWrapper)
+
+    userContainer.register()
+
+    expect(() => {
+      userContainer.get<unknown>('InvalidRepository')
+    }).toThrowError('Key InvalidRepository does not exist in container')
+  })
+
+  test('Deve lançar erro se tentar registrar um artefato já registrado', () => {
+    const db = {} as DatabaseClientInterface
+    const containerWrapper = new ContainerWrapper()
+    containerWrapper.add<DatabaseClientInterface>('db', db)
+
+    const userContainer = new UserContainer(containerWrapper)
+
+    userContainer.register()
+
+    expect(() => {
+      userContainer.register()
+    }).toThrowError('Key UserRepository already exists in container')
+  })
+
+  test('Deve lançar erro se tentar criar um UserContainer sem a conexao com banco no container wrapper', () => {
+    const containerWrapper = new ContainerWrapper()
+
+    expect(() => {
+      new UserContainer(containerWrapper)
+    }).toThrowError('Database client not found in container')
+  })
 })

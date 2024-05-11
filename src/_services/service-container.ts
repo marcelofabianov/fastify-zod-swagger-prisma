@@ -1,4 +1,3 @@
-import { env } from '@core/environment'
 import { PasswordValidate } from './password/password-validate'
 import { ContainerInterface } from '@core/container/container-interface'
 import { ContainerWrapperInterface } from '@core/container/container-wrapper-interface'
