@@ -6,4 +6,10 @@ export interface UserInterface {
   getUpdatedAt(): Date
   getDeletedAt(): Date | null
   getArchivedAt(): Date | null
+  isDeleted(): boolean
+  isArchived(): boolean
+  delete(): void
+  archive(): void
+  restore(): void
+  activate(): void
 }

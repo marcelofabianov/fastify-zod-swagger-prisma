@@ -10,8 +10,8 @@ export class User implements UserInterface {
     private readonly email: EmailInterface,
     private readonly createdAt: Date,
     private readonly updatedAt: Date,
-    private readonly deletedAt: Date | null,
-    private readonly archivedAt: Date | null,
+    private deletedAt: Date | null,
+    private archivedAt: Date | null,
   ) {}
 
   public static create(dto: CreateUserDtoInterface): UserInterface {
@@ -52,5 +52,29 @@ export class User implements UserInterface {
 
   public getArchivedAt(): Date | null {
     return this.archivedAt
+  }
+
+  public isDeleted(): boolean {
+    return this.deletedAt !== null
+  }
+
+  public isArchived(): boolean {
+    return this.archivedAt !== null
+  }
+
+  public delete(): void {
+    this.deletedAt = new Date()
+  }
+
+  public archive(): void {
+    this.archivedAt = new Date()
+  }
+
+  public restore(): void {
+    this.deletedAt = null
+  }
+
+  public activate(): void {
+    this.archivedAt = null
   }
 }
