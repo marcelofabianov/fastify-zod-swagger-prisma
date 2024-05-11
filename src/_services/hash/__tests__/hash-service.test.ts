@@ -8,8 +8,11 @@ describe('Services / HashService', () => {
 
   beforeEach(() => {
     const salt =
-      'E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855'
-    hashService = new HashService(salt)
+      '09a4e004d6f5b4770cb36105564e3f55d98a08956038ff9ca2bf629e9866dd56'
+
+    const timeCost = 2
+
+    hashService = new HashService(salt, timeCost)
   })
 
   test('Deve retornar um hash gerado a partir do valor informado', async () => {
@@ -37,21 +40,22 @@ describe('Services / HashService', () => {
     expect(isMatch).toBeFalsy()
   })
 
-  test('Deve lançar um excetion quando o salt esta invalido ao tentar gerar o hash', async () => {
-    const salt = 'invalid'
-    const hashServiceInvalid = new HashService(salt)
+  test('Deve lançar um erro ao tentar instanciar o serviço com um timeCost menor que 2', () => {
+    const salt =
+      '12a5ef86aabdd779a2223427541ff5ef9715938496953125f8dffc5ab66e79d9'
+    const timeCost = 1
 
-    expect(() => hashServiceInvalid.hash('value')).rejects.toThrow(
-      HashErrorEnum.ERROR_HASHING,
+    expect(() => new HashService(salt, timeCost)).toThrowError(
+      HashErrorEnum.ERROR_TIME_COST,
     )
   })
 
-  test('Deve lançar um exception quando o salt esta invalido ao tentar fazer comparacao', async () => {
+  test('Deve lançar um erro ao tentar instanciar o serviço com um salt menor que 8 caracteres', () => {
     const salt = 'invalid'
-    const hashServiceInvalid = new HashService(salt)
+    const timeCost = 3
 
-    expect(() => hashServiceInvalid.verify('value', 'hash')).rejects.toThrow(
-      HashErrorEnum.ERROR_COMPARING,
+    expect(() => new HashService(salt, timeCost)).toThrowError(
+      HashErrorEnum.ERROR_SALT_INVALID,
     )
   })
 })
